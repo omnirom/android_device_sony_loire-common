@@ -1,0 +1,9 @@
+# mount point    fstype    device            [device2]   fstype2
+/boot           emmc    /dev/block/bootdevice/by-name/boot
+/recovery       emmc    /dev/block/bootdevice/by-name/FOTAKernel
+/system         ext4    /dev/block/bootdevice/by-name/system
+/cache          ext4    /dev/block/bootdevice/by-name/cache
+/data           ext4    /dev/block/bootdevice/by-name/userdata                         length=-16384
+
+/external_sd    vfat    /devices/soc.0/7864900.sdhci/mmc_host/mmc*                     flags=display="Micro SDcard";storage;wipeingui;removable
+/usb-otg        vfat    /devices/platform/msm_hsusb_host/usb*                          flags=display="USB OTG";storage;wipeingui;removable
