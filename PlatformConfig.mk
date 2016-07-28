@@ -53,7 +53,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 10737418240
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
-TARGET_RECOVERY_FSTAB = device/sony/loire/rootdir/fstab.loire
+TARGET_RECOVERY_FSTAB = device/sony/loire-common/rootdir/fstab.loire
 
 # Wi-Fi definitions for Broadcom solution
 BOARD_WLAN_DEVICE           := bcmdhd
@@ -67,10 +67,10 @@ WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 
 # BT definitions for Broadcom solution
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/sony/loire/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/sony/loire-common/bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_BLUEDROID_VENDOR_CONF := device/sony/loire/bluetooth/vnd_generic.txt
+BOARD_BLUEDROID_VENDOR_CONF := device/sony/loire-common/bluetooth/vnd_generic.txt
 
 # RIL
 TARGET_PER_MGR_ENABLED := true
@@ -83,9 +83,9 @@ BOARD_HAVE_ALTERNATE_FM := true
 BOARD_HAVE_BCM_FM := true
 
 # Props for hotplugging
-TARGET_SYSTEM_PROP += device/sony/loire/system.prop
+TARGET_SYSTEM_PROP += device/sony/loire-common/system.prop
 
 # SELinux
-BOARD_SEPOLICY_DIRS += device/sony/loire/sepolicy
+BOARD_SEPOLICY_DIRS += device/sony/loire-common/sepolicy
 
-include device/sony/common/CommonConfig.mk
+include device/sony/common/CommonConfigOmni.mk
