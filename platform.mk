@@ -51,6 +51,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
 
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    device/sony/loire/overlay
+
 # Platform Init
 PRODUCT_PACKAGES += \
     fstab.loire \
@@ -84,6 +88,12 @@ PRODUCT_PACKAGES += \
 # Keymaster
 PRODUCT_PACKAGES += \
     keystore.msm8952
+
+# FM
+PRODUCT_PACKAGES += \
+    FMRadio \
+    brcm-uim-sysfs \
+    libfmjni
 
 # RILD
 PRODUCT_PROPERTY_OVERRIDES += \
