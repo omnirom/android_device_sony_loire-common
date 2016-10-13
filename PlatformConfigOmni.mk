@@ -13,3 +13,9 @@
 # limitations under the License.
 
 include device/sony/loire-common/PlatformConfig.mk
+
+# cryptfs hw
+TARGET_HW_DISK_ENCRYPTION := true
+
+# cmdline
+BOARD_KERNEL_CMDLINE += androidboot.bootdevice=7824900.sdhci
