@@ -90,10 +90,10 @@ PRODUCT_PACKAGES += \
     keystore.msm8952
 
 # FM
-PRODUCT_PACKAGES += \
-    FMRadio \
-    brcm-uim-sysfs \
-    libfmjni
+# PRODUCT_PACKAGES += \
+#    FMRadio \
+#    brcm-uim-sysfs \
+#    libfmjni
 
 # RILD
 PRODUCT_PROPERTY_OVERRIDES += \
