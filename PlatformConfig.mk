@@ -79,8 +79,8 @@ TARGET_PER_MGR_ENABLED := true
 NFC_NXP_CHIP_TYPE := PN547C2
 
 # FM definitions for Broadcom solution
-BOARD_HAVE_ALTERNATE_FM := true
-BOARD_HAVE_BCM_FM := true
+# BOARD_HAVE_ALTERNATE_FM := true
+# BOARD_HAVE_BCM_FM := true
 
 # Props for hotplugging
 TARGET_SYSTEM_PROP += device/sony/loire-common/system.prop
