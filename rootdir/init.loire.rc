@@ -17,7 +17,7 @@ import init.common.usb.rc
 import init.loire.pwr.rc
 
 on fs
-    symlink /dev/block/platform/soc.0/7824900.sdhci /dev/block/bootdevice
+    symlink /dev/block/platform/soc/7824900.sdhci /dev/block/bootdevice
 
     mount_all ./fstab.loire
     swapon_all ./fstab.loire
@@ -26,6 +26,9 @@ on fs
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
+    # Bluetooth
+    chown system system /sys/devices/soc/bcmdhd_wlan.114/macaddr
+
     # Cover mode
     chown system system /sys/devices/virtual/input/clearpad/cover_mode_enabled
     chown system system /sys/devices/virtual/input/clearpad/cover_win_bottom
@@ -55,12 +58,12 @@ on boot
     # Required for fingerprint
     chown system system /sys/bus/spi/devices/spi0.1/clk_enable
     chmod 0660 /sys/bus/spi/devices/spi0.1/clk_enable
-    chown system system /sys/devices/soc.0/fpc1145_device/spi_prepare
-    chmod 0660 /sys/devices/soc.0/fpc1145_device/spi_prepare
-    chown system system /sys/devices/soc.0/fpc1145_device/wakeup_enable
-    chmod 0660 /sys/devices/soc.0/fpc1145_device/wakeup_enable
-    chown system system /sys/devices/soc.0/fpc1145_device/irq
-    chmod 0660 /sys/devices/soc.0/fpc1145_device/irq
+    chown system system /sys/devices/soc/fpc1145_device/spi_prepare
+    chmod 0660 /sys/devices/soc/fpc1145_device/spi_prepare
+    chown system system /sys/devices/soc/fpc1145_device/wakeup_enable
+    chmod 0660 /sys/devices/soc/fpc1145_device/wakeup_enable
+    chown system system /sys/devices/soc/fpc1145_device/irq
+    chmod 0660 /sys/devices/soc/fpc1145_device/irq
 
     # add a cpuset for the camera daemon
     # we want all the little cores for camera
@@ -81,8 +84,10 @@ on boot
     write /dev/cpuset/camera-daemon/cpus 0-3
 
 # OSS WLAN and BT MAC setup
-service macaddrsetup /system/bin/macaddrsetup /sys/devices/soc.0/bcmdhd_wlan.114/macaddr
-    user root
+service macaddrsetup /system/bin/macaddrsetup /sys/devices/soc/bcmdhd_wlan.114/macaddr
+    class core
+    user system
+    group system bluetooth
     disabled
     oneshot
     writepid /dev/cpuset/system-background/tasks
@@ -150,13 +155,11 @@ service uim /system/bin/brcm-uim-sysfs
     user root
     group bluetooth net_bt_admin net_bt
     writepid /dev/cpuset/system-background/tasks
+    disabled
 
 on property:vold.post_fs_data_done=1
     # Generate Bluetooth MAC address file only when /data is ready
     start macaddrsetup
-    # Wait for the file to be created by macaddrsetup
-    wait /data/etc/bluetooth_bdaddr
-    chown bluetooth bluetooth /data/etc/bluetooth_bdaddr
 
 on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
