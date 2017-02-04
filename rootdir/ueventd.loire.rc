@@ -112,21 +112,20 @@
 /dev/ttyHS0                                         0660 bluetooth net_bt_stack
 
 # NFC
-/dev/nfc-nci                                        0660 nfc nfc
-/dev/pn544                                          0660 nfc nfc
-/dev/pn547                                          0660 nfc nfc
-/dev/pn54x                                          0660 nfc nfc
-/sys/devices/f9928000.i2c/i2c-6/6-0028  init_deinit 0200 nfc nfc
-/sys/devices/f9928000.i2c/i2c-6/6-0028  set_pwr     0200 nfc nfc
-/sys/devices/f9928000.i2c/i2c-6/6-0028  res_ready   0400 nfc nfc
-/sys/devices/f9928000.i2c/i2c-6/6-0028  recv_rsp    0600 nfc nfc
-/sys/devices/f9928000.i2c/i2c-6/6-0028  send_cmd    0200 nfc nfc
+/dev/pn54x                                               0660 nfc nfc
+/sys/devices/soc.0/7af6000.i2c/i2c-6/6-0028  init_deinit 0200 nfc nfc
+/sys/devices/soc.0/7af6000.i2c/i2c-6/6-0028  set_pwr     0200 nfc nfc
+/sys/devices/soc.0/7af6000.i2c/i2c-6/6-0028  res_ready   0400 nfc nfc
+/sys/devices/soc.0/7af6000.i2c/i2c-6/6-0028  recv_rsp    0600 nfc nfc
+/sys/devices/soc.0/7af6000.i2c/i2c-6/6-0028  send_cmd    0200 nfc nfc
 
 # LED
 /sys/devices/soc.0/03-qcom,leds-d800/leds/wled:backlight max_brightness 0664 system system
 /sys/devices/soc.0/03-qcom,leds-d800/leds/wled:backlight brightness     0664 system system
 /sys/devices/soc.0/7af6000.i2c/i2c-6/6-0042/leds/led:* max_brightness   0664 system system
 /sys/devices/soc.0/7af6000.i2c/i2c-6/6-0042/leds/led:* brightness       0664 system system
+/sys/devices/soc.0/7af6000.i2c/i2c-6/6-0042/leds/led:* blink            0664 system system
+/sys/devices/soc.0/7af6000.i2c/i2c-6/6-0042/pattern_run                 0664 system system
 /sys/class/leds/lcd-backlight/max_brightness                            0644 root system
 /sys/class/leds/lcd-backlight/brightness                                0664 system system
 
@@ -142,3 +141,6 @@
 /sys/devices/system/cpu/cpuquiet/rqbalance/balance_level             0660 system system
 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_run_thresholds         0660 system system
 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_down_run_thresholds    0660 system system
+
+# BT/FM/ANT+ V4L2
+/dev/brcm_bt_drv          0660   bluetooth  net_bt_stack
