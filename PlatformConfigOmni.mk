@@ -12,4 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+AUDIO_FEATURE_ENABLED_SOURCE_TRACKING := true
+
 include device/sony/loire-common/PlatformConfig.mk
