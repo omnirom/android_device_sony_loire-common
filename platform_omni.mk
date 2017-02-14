@@ -17,6 +17,10 @@ SONY_ROOT = device/sony/loire-common/rootdir
 # Common config
 include device/sony/loire-common/platform.mk
 
+# Snapdragon Camera
+PRODUCT_PACKAGES += \
+    SnapdragonCamera
+
 # Copying files
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/twrp.fstab:recovery/root/etc/twrp.fstab
