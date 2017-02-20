@@ -16,7 +16,3 @@ include device/sony/loire-common/PlatformConfig.mk
 
 # Do not build keymaster
 TARGET_PROVIDES_KEYMASTER := true
-
-# FM Radio
-BOARD_HAVE_FM_RADIO := true
-BOARD_DISABLE_FMRADIO_LIBJNI := true
