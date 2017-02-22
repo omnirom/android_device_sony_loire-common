@@ -15,6 +15,10 @@
 import init.common.rc
 import init.common.usb.rc
 import init.loire.pwr.rc
+import init.kitakami.pwr.rc
+
+on init
+    export LD_SHIM_LIBS "/system/lib64/libgui.so|/system/lib64/libgui_shim.so:/system/lib/libgui.so|/system/lib/libgui_shim.so:/system/vendor/lib/hw/camera.msm8952.so|/system/lib/camera.msm8952_shim.so"
 
 on fs
     symlink /dev/block/platform/soc.0/7824900.sdhci /dev/block/bootdevice
