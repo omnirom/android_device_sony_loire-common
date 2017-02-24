@@ -14,5 +14,8 @@
 
 include device/sony/loire-common/PlatformConfig.mk
 
+# We use stock camera blobs
+USE_CAMERA_STUB := true
+
 # Do not build keymaster
 TARGET_PROVIDES_KEYMASTER := true
