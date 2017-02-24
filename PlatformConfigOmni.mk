@@ -19,3 +19,7 @@ USE_CAMERA_STUB := true
 
 # Do not build keymaster
 TARGET_PROVIDES_KEYMASTER := true
+
+# Override the default android_filesystem_config.h
+TARGET_ANDROID_FILESYSTEM_CONFIG_H := \
+    device/sony/loire-common/include/private/android_filesystem_config.h
