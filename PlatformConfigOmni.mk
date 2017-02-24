@@ -17,6 +17,10 @@ include device/sony/loire-common/PlatformConfig.mk
 # Do not build keymaster
 TARGET_PROVIDES_KEYMASTER := true
 
+# Override the default android_filesystem_config.h
+TARGET_ANDROID_FILESYSTEM_CONFIG_H := \
+    device/sony/loire-common/include/private/android_filesystem_config.h
+
 # QCOM Hardware
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_USES_QCOM_BSP := true
