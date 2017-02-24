@@ -14,6 +14,9 @@
 
 SONY_ROOT = device/sony/loire-common/rootdir
 
+# We use stock camera blobs
+USE_CAMERA_STUB := true
+
 # Common config
 include device/sony/loire-common/platform.mk
 
