@@ -29,6 +29,9 @@ on fs
     restorecon_recursive /persist
     write /sys/kernel/boot_adsp/boot 1
 
+    # start clearpad_post_probe when filesystem is available for fwflash
+    write /sys/devices/virtual/input/clearpad/post_probe_start 1
+
 on boot
     # Bluetooth
     chown system system /sys/devices/soc.0/bcmdhd_wlan.116/macaddr
@@ -164,6 +167,31 @@ service uim /system/bin/brcm-uim-sysfs
 on property:vold.post_fs_data_done=1
     # Generate Bluetooth MAC address file only when /data is ready
     start macaddrsetup
+
+on property:sys.backlight_on=0
+    write /sys/devices/virtual/input/clearpad/force_sleep 2
+
+on property:sys.backlight_on=1
+    write /sys/devices/virtual/input/clearpad/force_sleep 0
+
+# Touch
+on property:persist.sys.touch.easywakeup=0
+    write /sys/devices/virtual/input/clearpad/wakeup_gesture 0
+
+on property:persist.sys.touch.easywakeup=1
+    write /sys/devices/virtual/input/clearpad/wakeup_gesture 1
+
+on property:persist.sys.touch.glove_mode=0
+    write /sys/devices/virtual/input/clearpad/glove 0
+
+on property:persist.sys.touch.glove_mode=1
+    write /sys/devices/virtual/input/clearpad/glove 1
+
+on property:sys.cover_state=0
+    write /sys/devices/virtual/input/clearpad/cover_status 0
+
+on property:sys.cover_state=1
+    write /sys/devices/virtual/input/clearpad/cover_status 1
 
 on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
