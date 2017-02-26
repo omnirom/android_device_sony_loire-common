@@ -1,15 +1,15 @@
 [
   {
-    "remote":       "choose",
+    "remote":       "omnirom",
     "repository":   "android_device_sony_common",
     "target_path":  "device/sony/common",
-    "revision":     "7.1-test"
+    "revision":     "caf-7.1"
   },
   {
-    "remote":       "choose",
-    "repository":   "android_kernel_sony_msm8994",
-    "target_path":  "kernel/sony/msm",
-    "revision":     "7.1-loire"
+    "remote":       "omnirom",
+    "repository":   "android_kernel_sony_msm",
+    "target_path":  "kernel/sony/msm8952",
+    "revision":     "msm8952-caf-7.1"
   },
   {
     "remote":       "omnirom",
