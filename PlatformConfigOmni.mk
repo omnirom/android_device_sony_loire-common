@@ -14,6 +14,9 @@
 
 include device/sony/loire-common/PlatformConfig.mk
 
+# Kernel source
+TARGET_KERNEL_SOURCE := kernel/sony/msm8952
+
 # Do not build keymaster
 TARGET_PROVIDES_KEYMASTER := true
 
