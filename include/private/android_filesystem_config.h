@@ -29,7 +29,7 @@
 #if defined(__ANDROID__)
 #include <linux/capability.h>
 #else
-#include "android_filesystem_capability.h"
+#include <private/android_filesystem_capability.h>
 #endif
 
 #define CAP_MASK_LONG(cap_name)  (1ULL << (cap_name))
@@ -108,14 +108,12 @@
 #define AID_RFS                2951  /* Remote Filesystem for peripheral processors */
 #define AID_RFS_SHARED         2952  /* Shared files for Remote Filesystem for peripheral processors  */
 
-#ifdef QCOM_HARDWARE
 #define AID_IDD                2987  /* SONY idd */
 #define AID_UPDATEMISCTA       2991  /* SONY updatemiscta */
 #define AID_TRIMAREA           2993  /* SONY trimarea */
 #define AID_CREDMGR_CLI        2996  /* SONY credmgr_client */
 #define AID_TAD                2997  /* SONY tad */
 #define AID_TA_QMI             2998  /* SONY ta_qmi */
-#endif
 
 #define AID_OEM_RESERVED_END   2999
 
@@ -138,10 +136,6 @@
 /* The range 5000-5999 is also reserved for OEM, and must never be used here. */
 #define AID_OEM_RESERVED_2_START 5000
 #define AID_OEM_RESERVED_2_END   5999
-
-#ifdef QCOM_HARDWARE
-#define AID_SENSORS       3011 /* access to /dev/socket/sensor_ctl_socket & QCCI/QCSI */
-#endif
 
 #define AID_EVERYBODY     9997  /* shared between all apps in the same profile */
 #define AID_MISC          9998  /* access to misc storage */
@@ -249,15 +243,13 @@ static const struct android_id_info android_ids[] = {
     { "readproc",      AID_READPROC, },
     { "wakelock",      AID_WAKELOCK, },
 
-#ifdef QCOM_HARDWARE
-    { "sensors",       AID_SENSORS, },
     { "idd",             AID_IDD, },
     { "updatemiscta",    AID_UPDATEMISCTA, },
     { "trimarea",        AID_TRIMAREA, },
     { "credmgr_client",  AID_CREDMGR_CLI, },
     { "tad",             AID_TAD, },
     { "ta_qmi",          AID_TA_QMI, },
-#endif
+
     { "rfs_old",           AID_RFS_OLD, },
     { "rfs_shared_old",    AID_RFS_SHARED_OLD, },
 
