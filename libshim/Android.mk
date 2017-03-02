@@ -31,7 +31,7 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := camera.msm8952_shim.cpp
 
-LOCAL_MODULE := camera.msm8994_shim
+LOCAL_MODULE := camera.msm8952_shim
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_SHARED_LIBRARIES := liblog
