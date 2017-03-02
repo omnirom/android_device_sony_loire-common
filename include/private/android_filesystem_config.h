@@ -29,7 +29,7 @@
 #if defined(__ANDROID__)
 #include <linux/capability.h>
 #else
-#include "android_filesystem_capability.h"
+#include <private/android_filesystem_capability.h>
 #endif
 
 #define CAP_MASK_LONG(cap_name)  (1ULL << (cap_name))

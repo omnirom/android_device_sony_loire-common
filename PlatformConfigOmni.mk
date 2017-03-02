@@ -14,6 +14,8 @@
 
 include device/sony/loire-common/PlatformConfig.mk
 
+TARGET_SPECIFIC_HEADER_PATH += include device/sony/loire-common/include
+
 # Kernel source
 TARGET_KERNEL_SOURCE := kernel/sony/msm8952
 
