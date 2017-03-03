@@ -86,8 +86,7 @@ PRODUCT_PACKAGES += \
     gps.msm8952
 
 # CAMERA
-ifneq (,$(filter true, $(USE_CAMERA_STUB)))
-# CAMERA
+ifneq ($(USE_CAMERA_STUB),true)
 PRODUCT_PACKAGES += \
     camera.msm8952
 else
@@ -154,6 +153,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.dpc=false \
     ro.qti.sensors.wu=true
 
+ifneq ($(USE_CAMERA_STUB),true)
 ## 8MP Switch for ES
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.8mp.config=true
+endif
