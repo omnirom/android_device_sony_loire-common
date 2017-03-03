@@ -93,9 +93,11 @@ PRODUCT_PACKAGES += \
 else
 # CAMERA & SENSORS
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qc.sdk.sensors.gestures=true \
-    ro.qc.sdk.gestures.camera=false \
-    ro.qc.sdk.camera.facialproc=false \
+    camera.hal1.packagelist=com.skype.raider,com.google.android.talk \
+    camera.display.umax=1920x1080 \
+    camera.display.lmax=1280x720 \
+    media.camera.ts.monotonic=1 \
+    camera.lowpower.record.enable=1 \
     camera.disable_zsl_mode=1
 endif
 
