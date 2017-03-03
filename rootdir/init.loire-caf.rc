@@ -21,6 +21,12 @@ on early-init
 
 on init
 
+    wait /dev/block/mmcblk0p1
+    chown tad tad /dev/block/mmcblk0p1
+    chmod 0770 /dev/block/mmcblk0p1
+    mkdir /idd 0751 idd idd
+    mkdir /rca 0750 idd idd
+
     # Enable subsystem restart
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
     write /sys/bus/msm_subsys/devices/subsys0/restart_level "RELATED"
@@ -407,7 +413,6 @@ service uim /system/bin/brcm-uim-sysfs
 
 # Start Security Daemon
 service secd /system/vendor/bin/secd
-    setenv LD_PRELOAD /system/vendor/lib64/lib-preload64.so
     class main
     user system
     group system
