@@ -9,7 +9,7 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
-ifneq (,$(filter true, $(USE_CAMERA_STUB)))
+ifeq ($(USE_CAMERA_STUB),true)
 include $(CLEAR_VARS)
 LOCAL_MODULE := init.$(TARGET_DEVICE)
 LOCAL_SRC_FILES := init.loire-caf.rc
