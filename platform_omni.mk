@@ -24,3 +24,6 @@ PRODUCT_PACKAGES += \
 # Copying files
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/twrp.fstab:recovery/root/etc/twrp.fstab
+
+# TWRP
+$(call inherit-product, device/sony/loire-common/twrp.mk)
