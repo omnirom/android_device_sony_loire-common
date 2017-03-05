@@ -25,6 +25,9 @@ on fs
     restorecon_recursive /persist
     write /sys/kernel/boot_adsp/boot 1
 
+    # start clearpad_post_probe when filesystem is available for fwflash
+    write /sys/devices/virtual/input/clearpad/post_probe_start 1
+
 on boot
     # Bluetooth
     chown system system /sys/devices/soc.0/bcmdhd_wlan.116/macaddr
@@ -156,6 +159,12 @@ service uim /system/bin/brcm-uim-sysfs
     group bluetooth net_bt_admin net_bt
     seclabel u:r:uim:s0
     writepid /dev/cpuset/system-background/tasks
+
+on property:sys.backlight_on=0
+    write /sys/devices/virtual/input/clearpad/force_sleep 2
+
+on property:sys.backlight_on=1
+    write /sys/devices/virtual/input/clearpad/force_sleep 0
 
 on property:vold.post_fs_data_done=1
     # Generate Bluetooth MAC address file only when /data is ready
