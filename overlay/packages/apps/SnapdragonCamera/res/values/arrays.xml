@@ -18,10 +18,14 @@
 <resources>
     <!-- Camera Preferences Picture size dialog box entries -->
     <string-array name="pref_camera_picturesize_entries" translatable="false">
+        <item>(4:3) 21.0 MP</item>
+        <item>(4:3) 16.0 MP</item>
+        <item>(4:3) 16.0 MP</item>
         <item>(4:3) 8.0 MP</item>
         <item>(4:3) 5 MP</item>
         <item>(4:3) 3.1 MP</item>
         <item>(4:3) 1.9 MP</item>
+        <item>(16:9) 12.1 MP</item>
         <item>(16:9) 8.3 MP</item>
         <item>(16:9) 2.1 MP</item>
         <item>(16:9) 0.9 MP</item>
@@ -31,10 +35,13 @@
          size to the first one in the list that is also supported by the
          driver -->
     <string-array name="pref_camera_picturesize_entryvalues" translatable="false">
+        <item>4640x3480</item>
+        <item>4608x3456</item>
         <item>3264x2448</item>
         <item>2592x1944</item>
         <item>2048x1536</item>
         <item>1600x1200</item>
+        <item>4640x2610</item>
         <item>3840x2160</item>
         <item>1920x1080</item>
         <item>1280x720</item>
