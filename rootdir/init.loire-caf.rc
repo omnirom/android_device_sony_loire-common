@@ -420,7 +420,7 @@ service secd /system/vendor/bin/secd
     socket secd_devsec_sock stream 0660 system credmgr_client
     socket secd_credmgr_sock stream 0660 system credmgr_client
 
-service iddd /system/bin/vendor/iddd
+service iddd /system//vendor/bin/iddd
     class core
     user idd
     group idd log inet trimarea
