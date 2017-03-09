@@ -94,6 +94,13 @@ on post-fs-data
     # Create directory used by bluetooth subsystem
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
+    # SONY: Camera
+    mkdir /data/camera 0770 media camera
+    chown media camera /sys/devices/sony_camera_0/info
+    chmod 0770 /sys/devices/sony_camera_0/info
+    chown media camera /sys/devices/sony_camera_1/info
+    chmod 0770 /sys/devices/sony_camera_1/info
+
     # To observe dnsmasq.leases file for dhcp information of soft ap.
     chown dhcp system /data/misc/dhcp
 
