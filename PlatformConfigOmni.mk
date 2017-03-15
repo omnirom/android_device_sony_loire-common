@@ -13,6 +13,3 @@
 # limitations under the License.
 
 include device/sony/loire-common/PlatformConfig.mk
-
-# Do not build keymaster
-TARGET_PROVIDES_KEYMASTER := true
