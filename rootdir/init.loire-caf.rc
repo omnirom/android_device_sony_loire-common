@@ -96,9 +96,9 @@ on post-fs-data
 
     # SONY: Camera
     mkdir /data/camera 0770 media camera
-    chown media camera /sys/devices/sony_camera_0/info
+    chown cameraserver camera /sys/devices/sony_camera_0/info
     chmod 0770 /sys/devices/sony_camera_0/info
-    chown media camera /sys/devices/sony_camera_1/info
+    chown cameraserver camera /sys/devices/sony_camera_1/info
     chmod 0770 /sys/devices/sony_camera_1/info
 
     # To observe dnsmasq.leases file for dhcp information of soft ap.
@@ -179,6 +179,15 @@ on early-boot
     setrlimit 8 67108864 67108864
 
 on boot
+    chown cameraserver system /sys/class/leds/led:flash_0/brightness
+    chown cameraserver system /sys/class/leds/led:flash_1/brightness
+    chown cameraserver system /sys/class/leds/led:torch_0/brightness
+    chown cameraserver system /sys/class/leds/led:torch_1/brightness
+    chown cameraserver system /sys/class/leds/led:switch/brightness
+    chown cameraserver system /sys/class/leds/led:switch/strobe
+    chown cameraserver system /sys/class/leds/led:switch/duration
+    chown cameraserver system /sys/class/leds/led:switch/fault_status
+
     # Bluetooth modules
     chown system system /sys/module/bluetooth/parameters/disable_ertm
     chown system system /sys/module/bluetooth/parameters/disable_esco
@@ -427,7 +436,7 @@ service secd /system/vendor/bin/secd
     socket secd_devsec_sock stream 0660 system credmgr_client
     socket secd_credmgr_sock stream 0660 system credmgr_client
 
-service iddd /system//vendor/bin/iddd
+service iddd /system/vendor/bin/iddd
     class core
     user idd
     group idd log inet trimarea
@@ -436,7 +445,7 @@ service iddd /system//vendor/bin/iddd
 service tad_static /system/vendor/bin/tad_static /dev/block/bootdevice/by-name/TA 0,16
     class core
     user tad
-    group tad root
+    group root tad
     socket tad stream 0660 system trimarea
     seclabel u:r:tad:s0
     writepid /dev/cpuset/system-background/tasks
@@ -450,27 +459,26 @@ service ta_qmi_service /system/vendor/bin/ta_qmi_service
 # SONY prop
 service sct_service /system/vendor/bin/sct_service
     class core
-    user root
+    user root drmrpc
     writepid /dev/cpuset/system-background/tasks
 
 # SONY prop
 service mlog_qmi_service /system/vendor/bin/mlog_qmi_service
     class core
-    user root
+    user root wakelock drmrpc
     writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop
 service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
-    group system wakelock
+    group system wakelock drmrpc
     writepid /dev/cpuset/system-background/tasks
 
 # DSDS second ril
 service ril-daemon2 /system/bin/rild -c 2
     class main
     socket rild2 stream 660 root radio
-    socket sap_uim_socket2 stream 660 bluetooth bluetooth
     socket rild-debug2 stream 660 radio system
     user root
     disabled
@@ -486,7 +494,7 @@ service updatemiscta /system/vendor/bin/updatemiscta
 service qmuxd /system/vendor/bin/qmuxd
     class main
     user radio
-    group radio audio bluetooth wakelock gps nfc diag
+    group radio audio bluetooth wakelock gps nfc diag drmrpc
     disabled
     writepid /dev/cpuset/system-background/tasks
 
