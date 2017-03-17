@@ -130,6 +130,8 @@
 #define AID_READPROC      3009  /* Allow /proc read access */
 #define AID_WAKELOCK      3010  /* Allow system wakelock read/write access */
 
+#define AID_SENSORS       3011 /* access to /dev/socket/sensor_ctl_socket & QCCI/QCSI */
+
 #define AID_RFS_OLD          3012  /* DEPRECATED OLD ID FOR RFS, DO NOT USE */
 #define AID_RFS_SHARED_OLD   3013  /* DEPRECATED OLD ID FOR RFS-SHARED  */
 
@@ -243,6 +245,7 @@ static const struct android_id_info android_ids[] = {
     { "readproc",      AID_READPROC, },
     { "wakelock",      AID_WAKELOCK, },
 
+    { "sensors",       AID_SENSORS, },
     { "idd",             AID_IDD, },
     { "updatemiscta",    AID_UPDATEMISCTA, },
     { "trimarea",        AID_TRIMAREA, },
