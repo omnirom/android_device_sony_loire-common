@@ -18,10 +18,17 @@
      for different hardware or product builds. -->
 <resources>
 
-    <!-- Restart preview for back camera onPictureTaken -->
-    <bool name="back_camera_restart_preview_onPictureTaken">true</bool>
+    <!-- Opens back camera using openLegacy() and forces api v1 -->
+    <bool name="back_camera_open_legacy">false</bool>
 
-    <!-- Restart preview for front camera onPictureTaken -->
-    <bool name="front_camera_restart_preview_onPictureTaken">true</bool>
+    <!-- Opens front camera using openLegacy() and forces api v1 -->
+    <bool name="front_camera_open_legacy">false</bool>
 
+    <!-- Use following iso parameter.-->
+    <string name="key_iso">sony-iso</string>
+    <string name="key_iso_values">sony-iso-values</string>
+
+    <!-- ISO values use numbers.
+         Example: 50 instead of ISO50 -->
+    <bool name="iso_values_use_numbers">true</bool>
 </resources>
