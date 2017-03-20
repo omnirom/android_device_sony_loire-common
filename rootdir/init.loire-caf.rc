@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import init.omni.rc
 import init.common.usb.rc
 import init.loire.pwr.rc
 import init.kitakami.pwr.rc
