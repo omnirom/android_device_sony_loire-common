@@ -25,8 +25,15 @@ on init
     wait /dev/block/mmcblk0p1
     chown tad tad /dev/block/mmcblk0p1
     chmod 0770 /dev/block/mmcblk0p1
+
     mkdir /idd 0751 idd idd
+    mkdir /idd/lost+found 0770 root root
+    mkdir /idd/output 0755 idd idd
+    mkdir /idd/socket 0711 idd idd
+    mkdir /idd/startup-prober 0700 root root
+
     mkdir /rca 0750 idd idd
+    mkdir /rca/plugins 0750 idd idd
 
     # Enable subsystem restart
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
@@ -66,13 +73,15 @@ on fs
     swapon_all ./fstab.loire
 
     chown idd idd /idd
-    chmod 0751 /iddA
-    exec /system/bin/rm -r /idd/lost+found
+    chmod 0751 /idd
+    restorecon_recursive /idd
     symlink /idd /mnt/idd
+
     chown idd idd /rca
     chmod 0750 /rca
-    exec /system/bin/rm -r /rca/lost+found
+    restorecon_recursive /rca
     symlink /rca /mnt/rca
+
     restorecon_recursive /persist
     write /sys/kernel/boot_adsp/boot 1
 
@@ -81,16 +90,8 @@ on fs
 
 on post-fs-data
 
-    #Secd
+    # Secd
     mkdir /data/credmgr 0770 system credmgr_client
-    mkdir /idd/lost+found 0770 root root
-    mkdir /idd/output 0755 idd idd
-    mkdir /idd/socket 0711 idd idd
-    mkdir /idd/startup-prober 0700 root root
-
-    restorecon_recursive /idd
-    mkdir /rca/plugins 0750 idd idd
-    restorecon_recursive /rca
 
     # Create directory used by bluetooth subsystem
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
