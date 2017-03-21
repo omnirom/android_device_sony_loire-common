@@ -13,3 +13,6 @@
 # limitations under the License.
 
 include device/sony/loire-common/PlatformConfig.mk
+
+TARGET_QCOM_DISPLAY_VARIANT := caf-msm8952
+TARGET_QCOM_MEDIA_VARIANT := caf-msm8952
