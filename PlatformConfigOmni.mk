@@ -16,3 +16,9 @@ include device/sony/loire-common/PlatformConfig.mk
 
 TARGET_QCOM_DISPLAY_VARIANT := caf-msm8952
 TARGET_QCOM_MEDIA_VARIANT := caf-msm8952
+
+# Multihal
+USE_SENSOR_MULTI_HAL := true
+
+#Camera
+TARGET_USES_MEDIA_EXTENSIONS := true
