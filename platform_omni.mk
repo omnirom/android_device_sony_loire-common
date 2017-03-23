@@ -24,6 +24,10 @@ include device/sony/loire-common/platform.mk
 PRODUCT_PACKAGES += \
     SnapdragonCamera
 
+# Sensor multihal
+PRODUCT_PACKAGES += \
+    sensors.msm8952
+
 # Copying files
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/twrp.fstab:recovery/root/etc/twrp.fstab
