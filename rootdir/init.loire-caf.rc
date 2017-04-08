@@ -21,7 +21,6 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
 
 on init
-
     wait /dev/block/mmcblk0p1
     chown tad tad /dev/block/mmcblk0p1
     chmod 0770 /dev/block/mmcblk0p1
@@ -32,8 +31,10 @@ on init
     mkdir /idd/socket 0711 idd idd
     mkdir /idd/startup-prober 0700 root root
 
-    mkdir /rca 0750 idd idd
-    mkdir /rca/plugins 0750 idd idd
+    mkdir /misc 0750 idd idd
+    mkdir /misc/plugins 0750 idd idd
+    symlink /misc /rca
+    symlink /misc /mnt/rca
 
     # Enable subsystem restart
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
@@ -72,26 +73,47 @@ on fs
     mount_all ./fstab.loire
     swapon_all ./fstab.loire
 
-    chown idd idd /idd
-    chmod 0751 /idd
-    restorecon_recursive /idd
-    symlink /idd /mnt/idd
-
-    chown idd idd /rca
-    chmod 0750 /rca
-    restorecon_recursive /rca
-    symlink /rca /mnt/rca
-
-    restorecon_recursive /persist
     write /sys/kernel/boot_adsp/boot 1
 
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
 on post-fs-data
+    # SONY: Start early TA-users
+    mkdir /data/etc 0755 root shell
+    exec u:r:taimport:s0 -- /system/vendor/bin/taimport
+
+    # SONY: Import MiscTA to System properties
+    exec u:r:taimport:s0 -- /system/vendor/bin/taimport property
+
+    # taimport ready, use this as trigger for multi-cdf-symlinker
+    setprop init.taimport.ready true
+
+    # Create the directories used by DPM subsystem
+    mkdir /data/dpm 0771 system system
+    chown system system /data/dpm
+
+    mkdir /data/dpm/nsrm 0771 system system
+    chown system system /data/dpm/nsrm
+
+    chown idd idd /idd
+    chmod 0751 /idd
+    symlink /idd /mnt/idd
+
+    chown idd idd /rca
+    chmod 0750 /rca
+
+    # SONY: Create a dir for apfd script files
+    mkdir /data/system/apfd 0770 system system
 
     # Secd
     mkdir /data/credmgr 0770 system credmgr_client
+
+    restorecon_recursive /idd
+    restorecon_recursive /rca
+    restorecon_recursive /persist
+    restorecon_recursive /data/credmgr
+    restorecon_recursive /data/dpm
 
     # Create directory used by bluetooth subsystem
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
@@ -163,6 +185,14 @@ on post-fs-data
 
     # FM Radio
     mkdir /data/misc/fm 0770 system system
+
+    # Execute post dumper to move the partial tlcore from /idd to /data
+    exec /system/vendor/bin/post_dumper -m
+
+    # Create directory to store logs
+    mkdir /data/system/log 0770 root system
+    chown root system /data/system/log
+    chmod 0770 /data/system/log
 
     chown system /dev/block/bootdevice/by-name
 
@@ -437,11 +467,16 @@ service secd /system/vendor/bin/secd
     socket secd_ebl_sock stream 0660 system credmgr_client
     socket secd_devsec_sock stream 0660 system credmgr_client
     socket secd_credmgr_sock stream 0660 system credmgr_client
+    seclabel u:r:secd:s0
+    writepid /dev/cpuset/system-background/tasks
 
+# SONY: IDD daemon
 service iddd /system/vendor/bin/iddd
     class core
     user idd
     group idd log inet trimarea
+    seclabel u:r:idd:s0
+    writepid /dev/cpuset/system-background/tasks
 
 # SONY misc
 service tad_static /system/vendor/bin/tad_static /dev/block/bootdevice/by-name/TA 0,16
@@ -491,6 +526,8 @@ service updatemiscta /system/vendor/bin/updatemiscta
     user updatemiscta
     group trimarea
     oneshot
+    seclabel u:r:updatemiscta:s0
+    writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop
 service qmuxd /system/vendor/bin/qmuxd
@@ -610,6 +647,58 @@ service ril-daemon /system/bin/rild
     user root
     group radio cache inet misc audio log readproc wakelock qcom_diag drmrpc trimarea
 
+# SONY: Startup prober
+service startup-prober /system/vendor/bin/startup-prober
+    user root
+    oneshot
+    disabled
+    group trimarea drmrpc system credmgr_client
+    writepid /dev/cpuset/system-background/tasks
+
+# SONY: Startup Logger
+service startup-logger /system/vendor/bin/startup-logger
+    class late_start
+    user root
+    group root system trimarea
+    oneshot
+    seclabel u:r:startup-logger:s0
+    writepid /dev/cpuset/system-background/tasks
+
+# gtsconfd
+service gtsconfd /system/vendor/bin/gtsconfd
+    class main
+    socket gts_socket seqpacket 0660 root system
+    seclabel u:r:gtsconfd:s0
+    writepid /dev/cpuset/system-background/tasks
+
+# Native daemon for PacketFilter
+service apfd /system/vendor/bin/apfd
+    class main
+    socket apfd_socket stream 0660 root system
+    group system
+    seclabel u:r:apfd:s0
+    writepid /dev/cpuset/system-background/tasks
+
+service cnd /system/vendor/bin/cnd
+    class main
+    socket cnd stream 660 root inet
+    seclabel u:r:cnd:s0
+    writepid /dev/cpuset/system-background/tasks
+
+service dpmd /system/vendor/bin/dpmd
+    class late_start
+    socket dpmd stream 660 root system
+    group system readproc
+    seclabel u:r:dpmd:s0
+    writepid /dev/cpuset/system-background/tasks
+
+# Note! that there is a dependency towards taimport property
+# the property is set immediatly after execution of taimport.
+on property:init.taimport.ready=true
+    mkdir /data/customization 0755 system system
+    mkdir /data/customization/ota-config 0755 system system
+    restorecon /data/customization
+
 on property:persist.radio.multisim.config=dsds
     enable ril-daemon2
 
@@ -662,3 +751,6 @@ on property:init.svc.per_mgr=running
 
 on property:sys.shutdown.requested=*
     stop per_proxy
+
+on property:dev.bootcomplete=1
+    start startup-prober
