@@ -21,7 +21,6 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
 
 on init
-
     wait /dev/block/mmcblk0p1
     chown tad tad /dev/block/mmcblk0p1
     chmod 0770 /dev/block/mmcblk0p1
@@ -31,9 +30,7 @@ on init
     mkdir /idd/output 0755 idd idd
     mkdir /idd/socket 0711 idd idd
     mkdir /idd/startup-prober 0700 root root
-
-    mkdir /rca 0750 idd idd
-    mkdir /rca/plugins 0750 idd idd
+    symlink /idd /mnt/idd
 
     # Enable subsystem restart
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
@@ -72,16 +69,6 @@ on fs
     mount_all ./fstab.loire
     swapon_all ./fstab.loire
 
-    chown idd idd /idd
-    chmod 0751 /idd
-    restorecon_recursive /idd
-    symlink /idd /mnt/idd
-
-    chown idd idd /rca
-    chmod 0750 /rca
-    restorecon_recursive /rca
-    symlink /rca /mnt/rca
-
     restorecon_recursive /persist
     write /sys/kernel/boot_adsp/boot 1
 
@@ -89,12 +76,22 @@ on fs
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
 on post-fs-data
-
     # Secd
     mkdir /data/credmgr 0770 system credmgr_client
 
     # Create directory used by bluetooth subsystem
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
+
+    # idd permissions
+    chown idd idd /idd
+    chmod 0751 /idd
+    mkdir /idd/rca 0750 idd idd
+    mkdir /idd/rca/plugins 0750 idd idd
+    mkdir /idd/rca/startup-logger 0755 idd idd
+    symlink /idd/rca /rca
+    symlink /idd/rca /mnt/rca
+
+    restorecon_recursive /idd
 
     # SONY: Camera
     mkdir /data/camera 0770 media camera
@@ -163,6 +160,14 @@ on post-fs-data
 
     # FM Radio
     mkdir /data/misc/fm 0770 system system
+
+    # Execute post dumper to move the partial tlcore from /idd to /data
+    exec /system/vendor/bin/post_dumper -m
+
+    # Create directory to store logs
+    mkdir /data/system/log 0770 root system
+    chown root system /data/system/log
+    chmod 0770 /data/system/log
 
     chown system /dev/block/bootdevice/by-name
 
@@ -437,11 +442,33 @@ service secd /system/vendor/bin/secd
     socket secd_ebl_sock stream 0660 system credmgr_client
     socket secd_devsec_sock stream 0660 system credmgr_client
     socket secd_credmgr_sock stream 0660 system credmgr_client
+    seclabel u:r:secd:s0
+    writepid /dev/cpuset/system-background/tasks
 
+# SONY iddd daemon
 service iddd /system/vendor/bin/iddd
     class core
     user idd
     group idd log inet trimarea
+    seclabel u:r:idd:s0
+    writepid /dev/cpuset/system-background/tasks
+
+# SONY: Startup prober
+service startup-prober /system/vendor/bin/startup-prober
+    user root
+    oneshot
+    disabled
+    group trimarea drmrpc system credmgr_client
+    writepid /dev/cpuset/system-background/tasks
+
+# SONY: Startup Logger
+service startup-logger /system/vendor/bin/startup-logger
+    class late_start
+    user root
+    group root system trimarea
+    oneshot
+    seclabel u:r:startup-logger:s0
+    writepid /dev/cpuset/system-background/tasks
 
 # SONY misc
 service tad_static /system/vendor/bin/tad_static /dev/block/bootdevice/by-name/TA 0,16
@@ -486,11 +513,14 @@ service ril-daemon2 /system/bin/rild -c 2
     disabled
     group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log drmrpc trimarea
 
+# SONY miscta loader
 service updatemiscta /system/vendor/bin/updatemiscta
     class main
     user updatemiscta
     group trimarea
     oneshot
+    seclabel u:r:updatemiscta:s0
+    writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop
 service qmuxd /system/vendor/bin/qmuxd
@@ -662,3 +692,6 @@ on property:init.svc.per_mgr=running
 
 on property:sys.shutdown.requested=*
     stop per_proxy
+
+on property:dev.bootcomplete=1
+    start startup-prober
