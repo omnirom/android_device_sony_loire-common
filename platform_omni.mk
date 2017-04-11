@@ -28,6 +28,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     sensors.msm8952
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=libqti-perfd-client.so
+
 # lib camera shim
 PRODUCT_PACKAGES += \
     libshim_wvm
