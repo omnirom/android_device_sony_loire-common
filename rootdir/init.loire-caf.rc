@@ -21,6 +21,8 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
 
 on init
+    export LD_SHIM_LIBS "/system/vendor/lib/libwvm.so|libshim_wvm.so"
+
     wait /dev/block/mmcblk0p1
     chown tad tad /dev/block/mmcblk0p1
     chmod 0770 /dev/block/mmcblk0p1
