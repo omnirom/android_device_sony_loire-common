@@ -306,7 +306,7 @@ on boot
     write /proc/sys/kernel/dmesg_restrict 0
 
     # Bluetooth
-    chown system system /sys/devices/soc.0/bcmdhd_wlan.112/macaddr
+    chown system system /sys/devices/soc.0/bcmdhd_wlan.114/macaddr
 
     # Cover mode
     chown system system /sys/devices/virtual/input/clearpad/cover_mode_enabled
