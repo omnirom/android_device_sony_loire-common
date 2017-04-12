@@ -29,6 +29,10 @@ PRODUCT_PACKAGES += \
     sensors.msm8952
 
 PRODUCT_PROPERTY_OVERRIDES += \
+    vidc.dec.downscalar_width=1920 \
+    vidc.dec.downscalar_height=1088 \
+    media.vpp.enable=true \
+    media.msm8956hw=0 \
     ro.vendor.extension_library=libqti-perfd-client.so
 
 # lib camera shim
