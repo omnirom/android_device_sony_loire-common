@@ -188,14 +188,23 @@ on early-boot
     setrlimit 8 67108864 67108864
 
 on boot
-    chown cameraserver system /sys/class/leds/led:flash_0/brightness
-    chown cameraserver system /sys/class/leds/led:flash_1/brightness
-    chown cameraserver system /sys/class/leds/led:torch_0/brightness
-    chown cameraserver system /sys/class/leds/led:torch_1/brightness
-    chown cameraserver system /sys/class/leds/led:switch/brightness
-    chown cameraserver system /sys/class/leds/led:switch/strobe
-    chown cameraserver system /sys/class/leds/led:switch/duration
-    chown cameraserver system /sys/class/leds/led:switch/fault_status
+    chown system camera /sys/class/leds/led:flash_0/brightness
+    chown system camera /sys/class/leds/led:flash_1/brightness
+    chown system camera /sys/class/leds/led:torch_0/brightness
+    chown system camera /sys/class/leds/led:torch_1/brightness
+    chown system camera /sys/class/leds/led:switch/brightness
+    chown system camera /sys/class/leds/led:switch/strobe
+    chown system camera /sys/class/leds/led:switch/duration
+    chown system camera /sys/class/leds/led:switch/fault_status
+
+    chmod 0770 /sys/class/leds/led:flash_0/brightness
+    chmod 0770 /sys/class/leds/led:flash_1/brightness
+    chmod 0770 /sys/class/leds/led:torch_0/brightness
+    chmod 0770 /sys/class/leds/led:torch_1/brightness
+    chmod 0770 /sys/class/leds/led:switch/brightness
+    chmod 0770 /sys/class/leds/led:switch/strobe
+    chmod 0770 /sys/class/leds/led:switch/duration
+    chmod 0770 /sys/class/leds/led:switch/fault_status
 
     # Bluetooth modules
     chown system system /sys/module/bluetooth/parameters/disable_ertm
@@ -438,7 +447,7 @@ service uim /system/bin/brcm-uim-sysfs
 
 # Start Security Daemon
 service secd /system/vendor/bin/secd
-    class main
+    class late_start
     user system
     group system
     socket secd_ebl_sock stream 0660 system credmgr_client
@@ -697,3 +706,12 @@ on property:sys.shutdown.requested=*
 
 on property:dev.bootcomplete=1
     start startup-prober
+
+# Start Key Provision daemon
+service keyprovd /system/vendor/bin/keyprovd
+    class late_start
+    user system
+    group system
+    oneshot
+    seclabel u:r:keyprovd:s0
+    writepid /dev/cpuset/foreground/tasks
