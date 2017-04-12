@@ -129,6 +129,18 @@
 /sys/class/leds/lcd-backlight/max_brightness                            0644 root system
 /sys/class/leds/lcd-backlight/brightness                                0664 system system
 
+# Camera
+/sys/class/leds/led:flash_0/brightness     0664 camera system
+/sys/class/leds/led:flash_1/brightness     0664 camera system
+/sys/class/leds/led:torch_0/brightness     0664 camera system
+/sys/class/leds/led:torch_1/brightness     0664 camera system
+/sys/class/leds/led:switch/brightness      0664 camera system
+/sys/class/leds/led:switch/strobe          0664 camera system
+/sys/class/leds/led:switch/duration        0664 camera system
+/sys/class/leds/led:switch/fault_status    0664 camera system
+/sys/devices/sony_camera_0/info            0770 cameraserver camera
+/sys/devices/sony_camera_1/info            0770 cameraserver camera
+
 # Thermanager
 /sys/module/msm_performance/parameters/cpu_max_freq   0664 system system
 /sys/module/msm_performance/parameters/cpu_min_freq   0664 system system
