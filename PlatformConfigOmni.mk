@@ -22,3 +22,6 @@ USE_SENSOR_MULTI_HAL := true
 
 #Camera
 TARGET_USES_MEDIA_EXTENSIONS := true
+
+#BCM BT/FM
+BOARD_HAVE_BCM_FM_SYSFS := "/sys/bus/platform/drivers/bcm_ldisc/bcm_ldisc/"
