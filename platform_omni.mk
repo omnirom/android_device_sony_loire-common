@@ -17,6 +17,9 @@ SONY_ROOT = device/sony/loire-common/rootdir
 # We use stock camera blobs
 USE_CAMERA_STUB := true
 
+# kernel
+TARGET_KERNEL_SOURCE := kernel/sony/msm8952
+
 # Common config
 include device/sony/loire-common/platform.mk
 
