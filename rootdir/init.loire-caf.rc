@@ -15,7 +15,6 @@
 import init.omni.rc
 import init.common.usb.rc
 import init.loire.pwr.rc
-import init.kitakami.pwr.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
@@ -596,7 +595,6 @@ service timekeep /system/bin/timekeep restore
     group root
     oneshot
     writepid /dev/cpuset/system-background/tasks
-
 
 on property:ro.boot.baseband=apq
     setprop ro.radio.noril yes
