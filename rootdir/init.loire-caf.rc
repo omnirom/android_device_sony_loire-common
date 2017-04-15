@@ -649,6 +649,13 @@ service ril-daemon /system/bin/rild
     user root
     group radio cache inet misc audio log readproc wakelock qcom_diag drmrpc trimarea
 
+on property:vold.decrypt=trigger_restart_min_framework
+    start timekeep
+
+on property:vold.decrypt=trigger_restart_framework
+    setprop vold.encrypt_progress ""
+    restart timekeep
+
 on property:persist.radio.multisim.config=dsds
     enable ril-daemon2
 

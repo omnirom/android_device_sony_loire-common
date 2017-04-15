@@ -45,9 +45,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     libshim_wvm
 
-# Copying files
-PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/twrp.fstab:recovery/root/etc/twrp.fstab
-
 # TWRP
 $(call inherit-product, device/sony/loire-common/twrp.mk)
