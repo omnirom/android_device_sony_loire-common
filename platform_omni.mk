@@ -30,6 +30,10 @@ include device/sony/loire-common/platform.mk
 PRODUCT_PACKAGES += \
     SnapdragonCamera
 
+# qseecomd
+PRODUCT_COPY_FILES += \
+    $(SONY_ROOT)/system/bin/init.qcom.qseecomd.sh:system/bin/init.qcom.qseecomd.sh
+
 # Sensor multihal
 PRODUCT_PACKAGES += \
     sensors.msm8952
@@ -44,10 +48,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # lib camera shim
 PRODUCT_PACKAGES += \
     libshim_wvm
-
-# Copying files
-PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/twrp.fstab:recovery/root/etc/twrp.fstab
 
 # TWRP
 $(call inherit-product, device/sony/loire-common/twrp.mk)
