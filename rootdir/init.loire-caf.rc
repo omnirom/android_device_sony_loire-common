@@ -18,6 +18,8 @@ import init.loire.pwr.rc
 
 on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
+    write /sys/module/msm_rtb/parameters/enable 0
+    mkdir /dsp 0771 media media
 
 on init
     export LD_SHIM_LIBS "/system/vendor/lib/libwvm.so|libshim_wvm.so"
@@ -40,9 +42,15 @@ on init
     write /sys/bus/msm_subsys/devices/subsys2/restart_level "RELATED"
     write /sys/bus/msm_subsys/devices/subsys3/restart_level "RELATED"
 
+    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
+    write /sys/devices/soc.0/7864900.sdhci/mmc_host/mmc1/clkgate_delay 1
+
     mkdir /tmp
     mount tmpfs tmpfs /tmp nosuid mode=0755,uid=0,gid=0
     symlink /dev/socket /tmp
+
+    chmod 0664 /proc/rdtag
+    chown root system /proc/rdtag
 
     # Set permissions for firmware partition
     mkdir /firmware 0771 system system
@@ -56,6 +64,8 @@ on init
     chown system system /sys/devices/mdss_dsi_panel/panel_id
     chmod 0440 /sys/devices/mdss_dsi_panel/panel_id
 
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
     # Setup zram options
@@ -76,9 +86,13 @@ on fs
     # start clearpad_post_probe when filesystem is available for fwflash
     write /sys/devices/virtual/input/clearpad/post_probe_start 1
 
+    write /proc/sys/vm/swap_thresh_cma_free_pages 7680
+
 on post-fs-data
     # Secd
     mkdir /data/credmgr 0770 system credmgr_client
+
+    mkdir /data/misc/ipa 0700 net_admin net_admin
 
     # Create directory used by bluetooth subsystem
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
@@ -170,6 +184,26 @@ on post-fs-data
     chown root system /data/system/log
     chmod 0770 /data/system/log
 
+    # Create the directories used by DPM subsystem
+    mkdir /data/dpm 0771 system system
+    chown system system /data/dpm
+    mkdir /data/dpm/nsrm 0771 system system
+    chown system system /data/dpm/nsrm
+
+    # Create directory used by display clients
+    mkdir /data/misc/display 0770 system graphics
+    mkdir /persist/display 0770 system graphics
+
+    # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
+    # We chown/chmod /persist again so because mount is run as root + defaults
+    chown system system /persist
+    chmod 0771 /persist
+
+    # Sensor
+    mkdir /persist/sensors 0775 system system
+    chmod 664 /persist/sensors/sensors_settings
+    chown system root /persist/sensors/sensors_settings
+
     chown system /dev/block/bootdevice/by-name
 
     setprop vold.post_fs_data_done 1
@@ -186,7 +220,17 @@ on early-boot
     # Set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
+    # bcm_wlan ssr
+    write /sys/module/bcm_wlan_ramdump/parameters/enable_ssr_dump 1
+
 on boot
+    start rmt_storage
+
+    write /proc/sys/kernel/sched_boost 1
+
+    # SONY: Enable wakeup irq module
+    write /sys/devices/platform/wakeup_debug.0/enable 1
+
     chown system camera /sys/class/leds/led:flash_0/brightness
     chown system camera /sys/class/leds/led:flash_1/brightness
     chown system camera /sys/class/leds/led:torch_0/brightness
@@ -204,6 +248,8 @@ on boot
     chmod 0770 /sys/class/leds/led:switch/strobe
     chmod 0770 /sys/class/leds/led:switch/duration
     chmod 0770 /sys/class/leds/led:switch/fault_status
+
+    chown system system /sys/class/leds/red/blink
 
     # Bluetooth modules
     chown system system /sys/module/bluetooth/parameters/disable_ertm
@@ -237,6 +283,12 @@ on boot
     chmod 2770 /dev/socket/qmux_gps
     mkdir /dev/socket/qmux_nfc 0770 nfc nfc
     chmod 2770 /dev/socket/qmux_nfc
+
+    mkdir /persist/drm 0770 system system
+    mkdir /persist/bluetooth 0770 bluetooth bluetooth
+    mkdir /persist/alarm 0770 system system
+    mkdir /persist/misc 0770 system system
+    mkdir /persist/time 0770 system system
 
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
@@ -369,6 +421,8 @@ on boot
     write /dev/cpuset/system-background/cpus 0-2
     write /dev/cpuset/top-app/cpus 0-5
     write /dev/cpuset/camera-daemon/cpus 0-3
+
+    write /sys/devices/soc.0/7864900.sdhci/mmc_host/mmc1/clkgate_delay 1
 
 # OSS WLAN and BT MAC setup
 service macaddrsetup /system/bin/macaddrsetup /sys/devices/soc.0/bcmdhd_wlan.114/macaddr
