@@ -34,6 +34,21 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/bin/init.qcom.qseecomd.sh:system/bin/init.qcom.qseecomd.sh
 
+# Audio
+PRODUCT_PACKAGES += \
+    audiod \
+    audio.a2dp.default \
+    audio.primary.msm8952 \
+    audio.r_submix.default \
+    audio.usb.default \
+    libaudio-resampler \
+    libaudioroute \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libtinycompress \
+    tinymix
+
 # Sensor multihal
 PRODUCT_PACKAGES += \
     sensors.msm8952
@@ -44,6 +59,30 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.vpp.enable=true \
     media.msm8956hw=0 \
     ro.vendor.extension_library=libqti-perfd-client.so
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio.offload.buffer.size.kb=64 \
+    audio.offload.min.duration.secs=30 \
+    audio.offload.video=false \
+    audio.offload.pcm.16bit.enable=true \
+    audio.offload.pcm.24bit.enable=true \
+    audio.offload.track.enable=true \
+    audio.offload.gapless.enabled=true \
+    audio.offload.multiple.enabled=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    voice.playback.conc.disabled=true \
+    voice.record.conc.disabled=false \
+    voice.voip.conc.disabled=false \
+    voice.conc.fallbackpath=deep-buffer \
+    tunnel.audio.encode = false \
+    audio.deep_buffer.media=true \
+    audio.playback.mch.downsample=true \
+    use.voice.path.for.pcm.voip=true \
+    ro.fm.transmitter=false \
+    audio.safx.pbe.enabled=true \
+    audio.pp.asphere.enabled=false \
+    audio.dolby.ds2.enabled=true
 
 # lib camera shim
 PRODUCT_PACKAGES += \
