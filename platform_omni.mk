@@ -26,28 +26,92 @@ TARGET_KERNEL_SOURCE := kernel/sony/msm8952
 # Common config
 include device/sony/loire-common/platform.mk
 
+# lib camera shim
+PRODUCT_PACKAGES += \
+    libshim_wvm
+
 # Snapdragon Camera
 PRODUCT_PACKAGES += \
     SnapdragonCamera
-
-# qseecomd
-PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/system/bin/init.qcom.qseecomd.sh:system/bin/init.qcom.qseecomd.sh
 
 # Sensor multihal
 PRODUCT_PACKAGES += \
     sensors.msm8952
 
+# qseecomd
+PRODUCT_COPY_FILES += \
+    $(SONY_ROOT)/system/bin/init.qcom.qseecomd.sh:system/bin/init.qcom.qseecomd.sh
+
+# Audio
+PRODUCT_COPY_FILES += \
+    $(TOPDIR)frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:/system/etc/a2dp_audio_policy_configuration.xml \
+    $(TOPDIR)frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:/system/etc/audio_policy_volumes.xml \
+    $(TOPDIR)frameworks/av/services/audiopolicy/config/default_volume_tables.xml:/system/etc/default_volume_tables.xml \
+    $(TOPDIR)frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:/system/etc/r_submix_audio_policy_configuration.xml \
+    $(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:/system/etc/usb_audio_policy_configuration.xml
+
+PRODUCT_PACKAGES += \
+    audiod \
+    audio.a2dp.default \
+    audio.primary.msm8952 \
+    audio.r_submix.default \
+    audio.usb.default \
+    libaudio-resampler \
+    libaudioroute \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libtinycompress \
+    tinymix
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio_hal.period_size=192 \
+    audio.deep_buffer.media=true \
+    audio.safx.pbe.enabled=true \
+    audio.pp.asphere.enabled=false \
+    audio.dolby.ds2.enabled=true \
+    audio.playback.mch.downsample=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qc.sdk.audio.fluencetype=none \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio.offload.buffer.size.kb=64 \
+    audio.offload.min.duration.secs=30 \
+    audio.offload.video=false \
+    audio.offload.pcm.16bit.enable=true \
+    audio.offload.pcm.24bit.enable=true \
+    audio.offload.track.enable=true \
+    audio.offload.gapless.enabled=true \
+    audio.offload.multiple.enabled=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    voice.playback.conc.disabled=true \
+    voice.record.conc.disabled=false \
+    voice.voip.conc.disabled=false \
+    voice.conc.fallbackpath=deep-buffer \
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    use.voice.path.for.pcm.voip=true \
+    use.qti.sw.alac.decoder=true \
+    use.qti.sw.ape.decoder=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    af.fast_track_multiplier \
+    media.aac_51_output_enabled=true \
+    ro.fm.transmitter=false \
+    tunnel.audio.encode = false
+
+# Media HAL
 PRODUCT_PROPERTY_OVERRIDES += \
     vidc.dec.downscalar_width=1920 \
     vidc.dec.downscalar_height=1088 \
     media.vpp.enable=true \
     media.msm8956hw=0 \
     ro.vendor.extension_library=libqti-perfd-client.so
-
-# lib camera shim
-PRODUCT_PACKAGES += \
-    libshim_wvm
 
 # TWRP
 $(call inherit-product, device/sony/loire-common/twrp.mk)
