@@ -591,13 +591,13 @@ service ril-daemon2 /system/bin/rild -c 2
     group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log drmrpc trimarea
 
 # SONY miscta loader
-service updatemiscta /system/vendor/bin/updatemiscta
-    class main
-    user updatemiscta
-    group trimarea
-    oneshot
-    seclabel u:r:updatemiscta:s0
-    writepid /dev/cpuset/system-background/tasks
+#service updatemiscta /system/vendor/bin/updatemiscta
+#    class main
+#    user updatemiscta
+#    group trimarea
+#    oneshot
+#    seclabel u:r:updatemiscta:s0
+#    writepid /dev/cpuset/system-background/tasks
 
 # QCOM prop
 service qmuxd /system/vendor/bin/qmuxd
