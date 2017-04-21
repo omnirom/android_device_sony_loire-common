@@ -14,6 +14,12 @@
 
 SONY_ROOT = device/sony/loire-common/rootdir
 
+# CAF Stuff
+BOARD_USES_QCOM_HARDWARE := true
+TARGET_QCOM_DISPLAY_VARIANT := caf-msm8952
+TARGET_QCOM_MEDIA_VARIANT := caf-msm8952
+TARGET_QCOM_AUDIO_VARIANT := caf-msm8952
+
 # We use stock camera blobs
 USE_CAMERA_STUB := true
 
