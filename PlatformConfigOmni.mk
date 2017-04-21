@@ -14,6 +14,8 @@
 
 include device/sony/loire-common/PlatformConfig.mk
 
+BOARD_USES_QCOM_HARDWARE := true
+
 TARGET_QCOM_DISPLAY_VARIANT := caf-msm8952
 TARGET_QCOM_MEDIA_VARIANT := caf-msm8952
 
