@@ -24,6 +24,9 @@ TARGET_QCOM_AUDIO_VARIANT := caf-msm8952
 BOARD_USES_ADRENO := true
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno510
 
+# CNE
+BOARD_USES_QCNE := true
+
 # We use stock camera blobs
 USE_CAMERA_STUB := true
 
@@ -122,6 +125,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.vpp.enable=true \
     media.msm8956hw=0 \
     ro.vendor.extension_library=libqti-perfd-client.so
+
+# CNE / DPM
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.cne.feature=1 \
+    persist.dpm.feature=1
 
 # TWRP
 $(call inherit-product, device/sony/loire-common/twrp.mk)
