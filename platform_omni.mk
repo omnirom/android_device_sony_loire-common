@@ -144,5 +144,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=1 \
     persist.dpm.feature=1
 
+# Data modules
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.data.mode=concurrent
+
+# Fingerprint
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.qfp=false
+
+# Enable VDS WFD solution
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.hwc.enable_vds=1
+
 # TWRP
 $(call inherit-product, device/sony/loire-common/twrp.mk)
