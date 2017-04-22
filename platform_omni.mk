@@ -39,6 +39,19 @@ TARGET_KERNEL_SOURCE := kernel/sony/msm8952
 # Common config
 include device/sony/loire-common/platform.mk
 
+# OMX
+PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    libextmedia_jni \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxCore \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
+    libOmxVdec \
+    libOmxVenc \
+    libstagefrighthw
+
 # lib camera shim
 PRODUCT_PACKAGES += \
     libshim_wvm
