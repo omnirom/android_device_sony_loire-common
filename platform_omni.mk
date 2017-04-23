@@ -14,6 +14,9 @@
 
 SONY_ROOT = device/sony/loire-common/rootdir
 
+# Fixup SELinux file labels
+TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
+
 # CAF Stuff
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_QCOM_DISPLAY_VARIANT := caf-msm8952
