@@ -20,6 +20,16 @@ LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := init.loire.usb
+LOCAL_SRC_FILES := init.loire.usb.rc
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_STEM := init.loire.usb
+LOCAL_MODULE_SUFFIX := .rc
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE := init.loire.pwr
 LOCAL_SRC_FILES := init.loire.pwr.rc
 LOCAL_MODULE_TAGS := optional

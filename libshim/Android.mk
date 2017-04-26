@@ -1,4 +1,4 @@
-# Copyright 2014 The Android Open Source Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,4 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include device/sony/loire-common/PlatformConfig.mk
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := wvm_shim.cpp
+LOCAL_SHARED_LIBRARIES := libstagefright_foundation
+LOCAL_MODULE := libshim_wvm
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)

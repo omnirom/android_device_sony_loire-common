@@ -1,4 +1,4 @@
-# Copyright (C) 2014 The Android Open Source Project
+# Copyright 2015 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,18 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SONY_ROOT = device/sony/loire-common/rootdir
+LOCAL_PATH:= $(call my-dir)
 
-# Common config
-include device/sony/loire-common/platform.mk
+include $(CLEAR_VARS)
 
-# Snapdragon Camera
-PRODUCT_PACKAGES += \
-    SnapdragonCamera
+LOCAL_SRC_FILES := \
+	voice_processing_descriptors.c
 
-# Copying files
-PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/twrp.fstab:recovery/root/etc/twrp.fstab
+LOCAL_C_INCLUDES += \
+	$(call include-path-for, audio-effects)
 
-# TWRP
-$(call inherit-product, device/sony/loire-common/twrp.mk)
+LOCAL_MULTILIB := $(AUDIOSERVER_MULTILIB)
+
+LOCAL_MODULE := libqcomvoiceprocessingdescriptors
+
+LOCAL_MODULE_RELATIVE_PATH := soundfx
+
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
