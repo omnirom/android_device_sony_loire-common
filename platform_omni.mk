@@ -39,6 +39,11 @@ TARGET_KERNEL_SOURCE := kernel/sony/msm8952
 # Common config
 include device/sony/loire-common/platform.mk
 
+PRODUCT_PACKAGES += \
+    ipacm \
+    ipacm-diag \
+    IPACM_cfg.xml
+
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
