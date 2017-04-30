@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Platform path
+PLATFORM_COMMON_PATH := device/sony/loire-common
+
 SONY_ROOT = device/sony/loire-common/rootdir
 
 # CAF Stuff
@@ -37,7 +40,16 @@ TARGET_HW_DISK_ENCRYPTION := true
 TARGET_KERNEL_SOURCE := kernel/sony/msm8952
 
 # Common config
-include device/sony/loire-common/platform.mk
+include $(PLATFORM_COMMON_PATH)/platform.mk
+
+# GPS
+USE_DEVICE_SPECIFIC_GPS := true
+
+PRODUCT_PACKAGES += \
+    gps.msm8952 \
+    libloc_ds_api \
+    libcurl \
+    libgnsspps
 
 # OMX
 PRODUCT_PACKAGES += \
@@ -157,4 +169,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.enable_vds=1
 
 # TWRP
-$(call inherit-product, device/sony/loire-common/twrp.mk)
+$(call inherit-product, $(PLATFORM_COMMON_PATH)/twrp.mk)
