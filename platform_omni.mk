@@ -51,6 +51,11 @@ PRODUCT_PACKAGES += \
     libcurl \
     libgnsspps
 
+PRODUCT_PACKAGES += \
+    ipacm \
+    ipacm-diag \
+    IPACM_cfg.xml
+
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
