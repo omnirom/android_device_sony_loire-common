@@ -9,10 +9,9 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
-ifeq ($(USE_CAMERA_STUB),true)
 include $(CLEAR_VARS)
 LOCAL_MODULE := init.$(TARGET_DEVICE)
-LOCAL_SRC_FILES := init.loire-caf.rc
+LOCAL_SRC_FILES := init.loire.rc
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_STEM := init.$(TARGET_DEVICE)
 LOCAL_MODULE_SUFFIX := .rc
@@ -29,17 +28,6 @@ LOCAL_MODULE_SUFFIX := .sh
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
-else
-include $(CLEAR_VARS)
-LOCAL_MODULE := init.$(TARGET_DEVICE)
-LOCAL_SRC_FILES := init.loire.rc
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_STEM := init.$(TARGET_DEVICE)
-LOCAL_MODULE_SUFFIX := .rc
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
-include $(BUILD_PREBUILT)
-endif
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := init.loire.pwr
@@ -72,4 +60,3 @@ LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
 $(shell mkdir -p $(PRODUCT_OUT)/root && pushd $(PRODUCT_OUT)/root > /dev/null && ln -s fstab.loire fstab.$(TARGET_DEVICE) && popd > /dev/null)
-

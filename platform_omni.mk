@@ -142,10 +142,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     use.qti.sw.ape.decoder=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    af.fast_track_multiplier \
+    af.fast_track_multiplier=1 \
     media.aac_51_output_enabled=true \
     ro.fm.transmitter=false \
-    tunnel.audio.encode = false
+    tunnel.audio.encode=false
+
+# CAMERA
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera.hal1.packagelist=com.skype.raider,com.google.android.talk \
+    camera.display.umax=1920x1080 \
+    camera.display.lmax=1280x720 \
+    media.camera.ts.monotonic=1 \
+    camera.lowpower.record.enable=1 \
+    camera.disable_zsl_mode=1
 
 # Media HAL
 PRODUCT_COPY_FILES += \
