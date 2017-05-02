@@ -88,21 +88,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.msm8952
 
-# CAMERA
-ifneq ($(USE_CAMERA_STUB),true)
-PRODUCT_PACKAGES += \
-    camera.msm8952
-else
-# CAMERA & SENSORS
-PRODUCT_PROPERTY_OVERRIDES += \
-    camera.hal1.packagelist=com.skype.raider,com.google.android.talk \
-    camera.display.umax=1920x1080 \
-    camera.display.lmax=1280x720 \
-    media.camera.ts.monotonic=1 \
-    camera.lowpower.record.enable=1 \
-    camera.disable_zsl_mode=1
-endif
-
 # Keymaster
 PRODUCT_PACKAGES += \
     keystore.msm8952
@@ -155,9 +140,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.tilt_detector=false \
     ro.qti.sensors.dpc=false \
     ro.qti.sensors.wu=true
-
-ifneq ($(USE_CAMERA_STUB),true)
-## 8MP Switch for ES
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.8mp.config=true
-endif
