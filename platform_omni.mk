@@ -148,11 +148,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
     tunnel.audio.encode = false
 
 # Media HAL
+PRODUCT_COPY_FILES += \
+    $(SONY_ROOT)/system/etc/media_codecs_8956.xml:system/etc/media_codecs_8956.xml \
+    $(SONY_ROOT)/system/etc/media_codecs_8956_v1.xml:system/etc/media_codecs_8956_v1.xml \
+    $(SONY_ROOT)/system/etc/media_codecs_performance_8956.xml:system/etc/media_codecs_performance_8956.xml \
+    $(SONY_ROOT)/system/etc/media_codecs_performance_8956_v1.xml:system/etc/media_codecs_performance_8956_v1.xml \
+    $(SONY_ROOT)/system/etc/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+    $(SONY_ROOT)/system/etc/media_profiles_8956.xml:system/etc/media_profiles_8956.xml
+
 PRODUCT_PROPERTY_OVERRIDES += \
     vidc.dec.downscalar_width=1920 \
     vidc.dec.downscalar_height=1088 \
-    media.vpp.enable=true \
     media.msm8956hw=0 \
+    mm.enable.smoothstreaming=true \
+    qcom.hw.aac.encoder=true \
+    mmp.enable.3g2=true \
     ro.vendor.extension_library=libqti-perfd-client.so
 
 # CNE / DPM
