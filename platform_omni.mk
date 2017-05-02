@@ -69,6 +69,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     sensors.msm8952
 
+# Telephony
+PRODUCT_PACKAGES += \
+    ims-ext-common \
+    telephony-ext \
+    rcscommon \
+    rcscommon.xml
+
 # qseecomd
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/bin/init.qcom.qseecomd.sh:system/bin/init.qcom.qseecomd.sh
