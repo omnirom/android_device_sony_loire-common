@@ -244,6 +244,8 @@ on early-boot
     # bcm_wlan ssr
     write /sys/module/bcm_wlan_ramdump/parameters/enable_ssr_dump 1
 
+    exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
+
 on boot
     start rmt_storage
 

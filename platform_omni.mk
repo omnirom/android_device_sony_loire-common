@@ -76,6 +76,10 @@ PRODUCT_PACKAGES += \
     rcscommon \
     rcscommon.xml
 
+# Media init
+PRODUCT_PACKAGES += \
+    init.qcom.early_boot
+
 # qseecomd
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/bin/init.qcom.qseecomd.sh:system/bin/init.qcom.qseecomd.sh
