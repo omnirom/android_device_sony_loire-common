@@ -57,9 +57,10 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
 
-# lib camera shim
+# lib shim
 PRODUCT_PACKAGES += \
-    libshim_wvm
+    libshim_wvm \
+    libshim_imsvt
 
 # Snapdragon Camera
 PRODUCT_PACKAGES += \
