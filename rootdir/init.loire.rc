@@ -84,7 +84,7 @@ on fs
 on post-fs
     start qseecomd
     # busy loop to wait for qseecomd started
-    exec - root root system -- /system/bin/init.qcom.qseecomd.sh
+    exec - root root system -- /init.qcom.qseecomd.sh
 
 on late-fs
     restorecon_recursive /persist
