@@ -83,3 +83,42 @@ camera.display.lmax=1280x720
 media.camera.ts.monotonic=1
 camera.lowpower.record.enable=1
 camera.disable_zsl_mode=1
+
+# ADSP sensors
+# Max rate
+ro.qti.sensors.max_accel_rate=false
+ro.qti.sensors.max_gyro_rate=false
+ro.qti.sensors.max_mag_rate=false
+ro.qti.sensors.max_geomag_rotv=50
+
+# Sensor type
+ro.qti.sdk.sensors.gestures=false
+ro.qti.sensors.pedometer=false
+ro.qti.sensors.step_detector=false
+ro.qti.sensors.step_counter=false
+ro.qti.sensors.pam=false
+ro.qti.sensors.scrn_ortn=false
+ro.qti.sensors.smd=false
+ro.qti.sensors.game_rv=false
+ro.qti.sensors.georv=false
+ro.qti.sensors.cmc=false
+ro.qti.sensors.bte=false
+ro.qti.sensors.fns=false
+ro.qti.sensors.qmd=false
+ro.qti.sensors.amd=false
+ro.qti.sensors.rmd=false
+ro.qti.sensors.vmd=false
+ro.qti.sensors.gtap=false
+ro.qti.sensors.tap=false
+ro.qti.sensors.facing=false
+ro.qti.sensors.tilt=false
+ro.qti.sensors.tilt_detector=false
+ro.qti.sensors.dpc=false
+ro.qti.sensors.wu=true
+
+# RILD
+rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
+ril.subscription.types=NV,RUIM
+
+# OpenGLES Nougat version
+ro.opengles.version=196610

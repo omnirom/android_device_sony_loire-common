@@ -20,6 +20,16 @@ LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := init.qcom.qseecomd
+LOCAL_SRC_FILES := init.qcom.qseecomd.sh
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_STEM := init.qcom.qseecomd
+LOCAL_MODULE_SUFFIX := .sh
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_ROOT_OUT)
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE := init.qcom.early_boot
 LOCAL_SRC_FILES := init.qcom.early_boot.sh
 LOCAL_MODULE_TAGS := optional
