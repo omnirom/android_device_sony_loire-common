@@ -98,6 +98,9 @@
 /dev/video33              0660   system     camera
 /sys/devices/virtual/smdpkt/smdcntl* open_timeout 0664 radio  radio
 
+# the DIAG device node is not world writable/readable.
+/dev/diag                 0660   system     qcom_diag
+
 # UIO devices
 /dev/uio0                 0660   system     system
 /dev/uio1                 0660   system     system
@@ -118,6 +121,16 @@
 /sys/devices/soc.0/7af6000.i2c/i2c-6/6-0028  res_ready   0400 nfc nfc
 /sys/devices/soc.0/7af6000.i2c/i2c-6/6-0028  recv_rsp    0600 nfc nfc
 /sys/devices/soc.0/7af6000.i2c/i2c-6/6-0028  send_cmd    0200 nfc nfc
+
+# PPD
+/sys/class/graphics/fb0/msm_cmd_autorefresh_en    0644 system graphics
+/sys/class/graphics/fb0/msm_fb_dfps_mode          0644 system graphics
+/sys/class/graphics/fb0/msm_fb_panel_info         0644 system graphics
+/sys/class/graphics/fb0/msm_fb_panel_status       0644 system graphics
+/sys/class/graphics/fb0/msm_fb_split              0644 system graphics
+/sys/class/graphics/fb0/msm_fb_src_split_info     0644 system graphics
+/sys/class/graphics/fb0/msm_fb_thermal_level      0644 system graphics
+/sys/class/graphics/fb0/msm_fb_type               0644 system graphics
 
 # LED
 /sys/devices/soc.0/03-qcom,leds-d800/leds/wled:backlight max_brightness 0664 system system
