@@ -164,7 +164,8 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    fingerprintd
+    fingerprintd \
+    fingerprint.msm8952
 
 # OMX
 PRODUCT_PACKAGES += \
