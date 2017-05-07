@@ -411,7 +411,7 @@ on boot
     write /proc/sys/kernel/dmesg_restrict 0
 
     # Bluetooth
-    chown system system /sys/devices/soc.0/bcmdhd_wlan.114/macaddr
+    chown system system /sys/devices/soc.0/bcmdhd_wlan.112/macaddr
 
     # Cover mode
     chown system system /sys/devices/virtual/input/clearpad/cover_mode_enabled
@@ -497,7 +497,7 @@ on boot
     chmod 666 /sys/devices/virtual/input/rgbcir_sensor/chip_pow
 
 # OSS WLAN and BT MAC setup
-service macaddrsetup /system/bin/macaddrsetup /sys/devices/soc.0/bcmdhd_wlan.114/macaddr
+service macaddrsetup /system/bin/macaddrsetup /sys/devices/soc.0/bcmdhd_wlan.112/macaddr
     class core
     user system
     group system bluetooth
