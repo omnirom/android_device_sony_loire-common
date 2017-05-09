@@ -18,6 +18,25 @@ rqbalance.normal.down_threshold=0 25 75 125 375 425
 ro.qcom.ad=1
 ro.qcom.ad.calib.data=/system/etc/ad_calib.cfg
 
+# IMS
+# Enable IMS service by default
+persist.radio.calls.on.ims=0
+
+# Bluetooth
+bluetooth.hfp.client=1
+ro.bluetooth.alwaysbleon=true
+
+# Property for vendor specific library
+ro.vendor.at_library=libqti-at.so
+ro.vendor.gt_library=libqti-gt.so
+
+# Trim properties
+ro.sys.fw.use_trim_settings=true
+ro.sys.fw.empty_app_percent=50
+ro.sys.fw.trim_empty_percent=100
+ro.sys.fw.trim_cache_percent=100
+ro.sys.fw.trim_enable_memory=2147483648
+
 # Audio
 audio_hal.period_size=192
 audio.deep_buffer.media=true
@@ -27,9 +46,14 @@ audio.dolby.ds2.enabled=true
 audio.playback.mch.downsample=true
 
 ro.qc.sdk.audio.fluencetype=none
+persist.audio.fluence.audiorec=false
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
 persist.audio.fluence.speaker=true
+
+persist.speaker.prot.enable=true
+persist.aanc.enable=true
+persist.headset.anc.type=feedback
 
 audio.offload.buffer.size.kb=64
 audio.offload.min.duration.secs=30
@@ -55,9 +79,12 @@ ro.fm.transmitter=false
 tunnel.audio.encode=false
 
 # Media
+ro.media.av_latency=60
 vidc.dec.downscalar_width=1920
 vidc.dec.downscalar_height=1088
+vidc.enc.narrow.searchrange=1
 media.msm8956hw=0
+media.vpp.enable=false
 mm.enable.smoothstreaming=true
 qcom.hw.aac.encoder=true
 mmp.enable.3g2=true
