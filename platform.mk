@@ -209,5 +209,28 @@ PRODUCT_PACKAGES += \
     rcscommon \
     rcscommon.xml
 
+# Set default properties
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp \
+    ro.sys.umsdirtyratio=5 \
+    drm.service.enabled=true
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.semc.version.sw=1300-4911 \
+    ro.semc.version.sw_variant=GLOBAL-LTE2A \
+    ro.semc.version.sw_revision=34.2.A.2.69 \
+    ro.semc.version.fs_revision=34.2.A.2.69
+
+ifneq ($(TARGET_BUILD_VARIANT),eng)
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.semc.version.sw_type=user
+endif
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.semc.version.cust=OmniROM \
+    ro.semc.version.cust_revision=$(PLATFORM_VERSION)_$(BUILD_ID)
+
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+
 # TWRP
 $(call inherit-product, device/sony/loire-common/twrp.mk)
