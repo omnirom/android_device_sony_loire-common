@@ -1,0 +1,14 @@
+type illumination, domain, domain_deprecated;
+type illumination_exec, exec_type, file_type;
+
+init_daemon_domain(illumination)
+
+allow illumination self:capability { setgid setuid };
+allow illumination self:capability2 { block_suspend };
+
+allow illumination sysfs_wake_lock:file rw_file_perms;
+
+allow illumination sensorservice_service:service_manager find;
+
+rw_dir_file(illumination, illumination_data_file)
+

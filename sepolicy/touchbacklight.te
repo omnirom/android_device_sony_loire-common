@@ -1,0 +1,6 @@
+type touchbacklight, domain, domain_deprecated;
+type touchbacklight_exec, exec_type, file_type;
+
+init_daemon_domain(touchbacklight)
+
+unix_socket_connect(touchbacklight, illumination, illumination)

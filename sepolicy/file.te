@@ -40,3 +40,6 @@ type taimport_data_file, file_type, data_file_type;
 # ppd
 type ppd_data_file, file_type, data_file_type;
 
+# illumination
+type illumination_socket, file_type;
+type illumination_data_file, file_type, data_file_type;

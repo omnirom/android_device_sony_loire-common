@@ -242,6 +242,9 @@ on post-fs-data
     chown system system /persist
     chmod 0771 /persist
 
+    # create directory for illumination service
+    mkdir /data/illumination_service 0770 system system
+
     # Sensor
     mkdir /persist/sensors 0775 system system
     chmod 664 /persist/sensors/sensors_settings
@@ -970,9 +973,6 @@ service keyprovd /system/vendor/bin/keyprovd
     seclabel u:r:keyprovd:s0
     writepid /dev/cpuset/foreground/tasks
 
-on property:vold.decrypt=trigger_restart_min_framework
-    restart timekeep
-
 service ppd /system/vendor/bin/mm-pp-daemon
     class late_start
     disabled
@@ -981,16 +981,36 @@ service ppd /system/vendor/bin/mm-pp-daemon
     seclabel u:r:mm-pp-daemon:s0
     group system graphics
 
+service illumination /system/vendor/bin/illumination_service
+    socket illumination stream 0660 system system
+    class main
+    user root
+    seclabel u:r:illumination:s0
+    writepid /dev/cpuset/system-background/tasks
+
+service touchbacklightd /system/vendor/bin/touchbacklightd
+    disabled
+    user system
+    group system
+    class main
+    seclabel u:r:touchbacklight:s0
+    writepid /dev/cpuset/system-background/tasks
+
+on property:vold.decrypt=trigger_restart_min_framework
+    restart timekeep
+
 on property:init.svc.surfaceflinger=stopped
     stop ppd
 
 on property:init.svc.surfaceflinger=running
+    start illumination
     start ppd
 
 on property:init.svc.surfaceflinger=restarting
     stop ppd
 
 on property:init.svc.zygote=stopped
+    stop illumination
     stop ppd
 
 on property:init.svc.zygote=running
@@ -998,3 +1018,9 @@ on property:init.svc.zygote=running
 
 on property:init.svc.zygote=restarting
     stop ppd
+
+on property:init.svc.illumination=running
+    start touchbacklightd
+
+on property:init.svc.illumination=stopped
+    stop touchbacklightd

@@ -65,6 +65,8 @@
 /system/vendor/bin/xtwifi-inet-agent            u:object_r:location_exec:s0
 /system/vendor/bin/xtwifi-client                u:object_r:location_exec:s0
 /system/vendor/bin/garden_app                   u:object_r:location_exec:s0
+/system/vendor/bin/touchbacklightd              u:object_r:touchbacklight_exec:s0
+/system/vendor/bin/illumination_service         u:object_r:illumination_exec:s0
 
 ###################################
 # sysfs files
@@ -195,3 +197,8 @@
 #
 /data/fpc(/.*)?                                                     u:object_r:fingerprintd_data_file:s0
 
+###################################
+# illumination
+#
+/data/illumination_service(/.*)?                                    u:object_r:illumination_data_file:s0
+/dev/socket/illumination                                            u:object_r:illumination_socket:s0

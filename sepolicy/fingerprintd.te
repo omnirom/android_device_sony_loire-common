@@ -13,3 +13,5 @@ allow fingerprintd idd_file:dir create_dir_perms;
 allow fingerprintd idd_socket:dir { search };
 allow fingerprintd idd_socket:sock_file create_file_perms;
 allow fingerprintd idd:unix_dgram_socket { sendto };
+
+unix_socket_connect(fingerprintd, illumination, illumination)

@@ -1,0 +1,3 @@
+rw_dir_file(servicemanager,illumination)
+
+allow servicemanager illumination:process { getattr };
