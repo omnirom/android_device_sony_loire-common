@@ -176,10 +176,6 @@ PRODUCT_PACKAGES += \
     ipacm-diag \
     IPACM_cfg.xml
 
-# Fingerprint
-PRODUCT_PACKAGES += \
-    fingerprintd
-
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
