@@ -78,7 +78,6 @@ media.vpp.enable=false
 mm.enable.smoothstreaming=true
 qcom.hw.aac.encoder=true
 mmp.enable.3g2=true
-ro.vendor.extension_library=libqti-perfd-client.so
 
 # CNE / DPM
 persist.cne.feature=1
