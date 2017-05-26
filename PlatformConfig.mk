@@ -122,6 +122,9 @@ MM_AUDIO_ENABLED_SAFX := true
 TARGET_USES_QCOM_MM_AUDIO := true
 USE_CUSTOM_AUDIO_POLICY := 1
 
+# Disable dex-preoptimization
+WITH_DEXPREOPT := false
+
 # Multihal
 USE_SENSOR_MULTI_HAL := true
 
@@ -134,7 +137,7 @@ TARGET_NO_RPC := true
 TARGET_USES_MEDIA_EXTENSIONS := true
 
 # BCM BT/FM
-BOARD_HAVE_BCM_FM_SYSFS := "/sys/bus/platform/drivers/bcm_ldisc/bcm_ldisc/"
+BOARD_HAVE_BCM_FM_SYSFS := "/sys/bus/platform/drivers/bcm_ldisc/bcm_ldisc"
 
 # Do not build keymaster
 TARGET_PROVIDES_KEYMASTER := true
