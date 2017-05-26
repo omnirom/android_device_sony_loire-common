@@ -100,6 +100,7 @@ media.camera.ts.monotonic=1
 camera.lowpower.record.enable=1
 camera.disable_zsl_mode=1
 vidc.enc.dcvs.extra-buff-count=2
+sf.dataspace.replace_invalid=1
 
 # ADSP sensors
 # Max rate
