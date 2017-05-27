@@ -942,10 +942,10 @@ service apfd /system/vendor/bin/apfd
     seclabel u:r:apfd:s0
 
 # gtsconfd
-service gtsconfd /system/vendor/bin/gtsconfd
-    class main
-    socket gts_socket seqpacket 0660 root system
-    seclabel u:r:gtsconfd:s0
+#service gtsconfd /system/vendor/bin/gtsconfd
+#    class main
+#    socket gts_socket seqpacket 0660 root system
+#    seclabel u:r:gtsconfd:s0
 
 service cnd /system/vendor/bin/cnd
     class main
