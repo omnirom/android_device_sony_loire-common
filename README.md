@@ -7,6 +7,3 @@ loire devices:
 
     Xperia X.................Suzu
     Xperia X Compact ........Kugo
-
-Build instructions
-http://developer.sonymobile.com/knowledge-base/open-source/open-devices/aosp-build-instructions/
