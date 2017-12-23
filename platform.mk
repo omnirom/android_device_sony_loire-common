@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Platform path
-PLATFORM_COMMON_PATH := device/sony/loire
+PLATFORM_COMMON_PATH := device/sony/loire-common
 
 TARGET_LEGACY_KEYMASTER := true
 

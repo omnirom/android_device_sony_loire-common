@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Platform path
-PLATFORM_COMMON_PATH := device/sony/loire
+PLATFORM_COMMON_PATH := device/sony/loire-common
 PRODUCT_PLATFORM_SOD := true
 
 TARGET_BOARD_PLATFORM := msm8952
