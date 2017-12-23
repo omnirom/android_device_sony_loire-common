@@ -25,14 +25,14 @@ SONY_ROOT := $(PLATFORM_COMMON_PATH)/rootdir
 
 # Audio
 PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/system/etc/aanc_tuning_mixer_wcd9335.txt:system/etc/aanc_tuning_mixer_wcd9335.txt \
-    $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml
+    $(SONY_ROOT)/vendor/etc/aanc_tuning_mixer_wcd9335.txt:$(TARGET_COPY_OUT_VENDOR)/etc/aanc_tuning_mixer_wcd9335.txt \
+    $(SONY_ROOT)/vendor/etc/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml
 
 # Media
 PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(SONY_ROOT)/system/etc/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
-    $(SONY_ROOT)/system/etc/media_profiles_V1_0.xml:system/vendor/etc/media_profiles_V1_0.xml
+    $(SONY_ROOT)/vendor/etc/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    $(SONY_ROOT)/vendor/etc/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
+    $(SONY_ROOT)/vendor/etc/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
 
 # IDC
 PRODUCT_COPY_FILES += \
@@ -49,13 +49,6 @@ PRODUCT_COPY_FILES += \
 # RQBalance-PowerHAL configuration
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/rqbalance_config.xml:system/etc/rqbalance_config.xml
-
-# Device Specific Hardware
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:system/etc/permissions/android.hardware.vulkan.level.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:system/etc/permissions/android.hardware.vulkan.version.xml \
-    frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
@@ -140,14 +133,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vidc.enc.disable_bframes=1 \
     vidc.enc.disable_pframes=1 \
     vidc.disable.split.mode=1
-    
+
 ## Avoid unsupported UBWC buffers on VENC
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.gralloc.gfx_ubwc_disable=1 \
     debug.gralloc.gfx_ubwc_disable_=1 \
     debug.gralloc.enable_fb_ubwc=0 \
     video.disable.ubwc=1
-    
 
 # USB controller setup
 PRODUCT_PROPERTY_OVERRIDES += \
