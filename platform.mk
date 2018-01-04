@@ -147,4 +147,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.usb.rndis.func.name=rndis_bam
 
 $(call inherit-product, device/sony/common/omni.mk)
-$(call inherit-product, $(PLATFORM_COMMON_PATH)/recovery/twrp.mk)
