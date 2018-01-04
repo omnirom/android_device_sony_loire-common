@@ -145,5 +145,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.usb.controller=msm_hsusb \
     sys.usb.rndis.func.name=rndis_bam
-
-$(call inherit-product, device/sony/common/omni.mk)
