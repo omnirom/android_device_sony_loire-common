@@ -163,5 +163,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.usb.rndis.func.name=rndis_bam
 
 # WiFi MAC address path
+ifneq ($(SOMC_KERNEL_VERSION),4.9)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.wifi.addr_path=/sys/devices/soc/soc:bcmdhd_wlan/macaddr
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.wifi.addr_path=/sys/devices/platform/soc/soc:bcmdhd_wlan/macaddr
+endif
