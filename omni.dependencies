@@ -3,6 +3,6 @@
     "remote":       "omnirom",
     "repository":   "android_device_sony_common",
     "target_path":  "device/sony/common",
-    "revision":     "android-8.1"
+    "revision":     "android-9.0"
   }
 ]
