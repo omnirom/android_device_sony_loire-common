@@ -43,4 +43,5 @@ TW_CRYPTO_KEY_LOC := "footer"
 # init
 PRODUCT_PACKAGES += \
     twrp.fstab \
+    init.recovery.twrp \
     init.recovery.usb
