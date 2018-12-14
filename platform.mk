@@ -173,6 +173,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.wifi.addr_path=/sys/devices/platform/soc/soc:bcmdhd_wlan/macaddr
 
-# Force camera API
-PRODUCT_PROPERTY_OVERRIDES += \
-    camera2.portability.force_api=2
