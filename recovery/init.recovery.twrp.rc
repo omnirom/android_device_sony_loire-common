@@ -3,6 +3,9 @@ on fs
     chown system drmrpc /dev/qseecom
     chmod 0664 /dev/ion
     chown system system /dev/ion
+    # set a keystore specific ro.hardware value
+    # this matches the name of the module in /odm
+    setprop ro.hardware.keystore msm8952
 
 on property:twrp.mount_to_decrypt=1
     start odm_qseecomd
