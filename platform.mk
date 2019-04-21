@@ -19,7 +19,6 @@ TARGET_LEGACY_KEYMASTER := true
 
 $(call inherit-product, device/sony/common/common.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 $(call inherit-product, $(PLATFORM_COMMON_PATH)/recovery/twrp.mk)
 
 SOMC_PLATFORM := loire
@@ -164,6 +163,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Use MSM8956 feature set for vidc encoders
 PRODUCT_PROPERTY_OVERRIDES += \
     media.msm8956hw=1
+
+# Skip loading libsdmextension.so in display hal
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.display.skip_extension_intf=1
 
 # USB controller setup
 PRODUCT_PROPERTY_OVERRIDES += \
